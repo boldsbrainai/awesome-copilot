@@ -11,6 +11,7 @@ ax profiles show
 ```
 
 Look at the output to understand what's configured:
+
 - `API Key: (not set)` or missing → key needs to be created/updated
 - No profile output or "No profiles found" → no profile exists yet
 - Connected but getting `401 Unauthorized` → key is wrong or expired
@@ -53,6 +54,7 @@ ax profiles create work --api-key $ARIZE_API_KEY --region us-east-1b
 ```
 
 To use a named profile with any `ax` command, add `-p NAME`:
+
 ```bash
 ax spans export PROJECT_ID -p work
 ```
@@ -67,7 +69,7 @@ If `ARIZE_API_KEY` is not already set, instruct the user to export it in their s
 export ARIZE_API_KEY="..."   # user pastes their key here in their own terminal
 ```
 
-They can find their key at https://app.arize.com/admin > API Keys. Recommend they create a **scoped service key** (not a personal user key) — service keys are not tied to an individual account and are safer for programmatic use. Keys are space-scoped — make sure they copy the key for the correct space.
+They can find their key at <https://app.arize.com/admin> > API Keys. Recommend they create a **scoped service key** (not a personal user key) — service keys are not tied to an individual account and are safer for programmatic use. Keys are space-scoped — make sure they copy the key for the correct space.
 
 Once the user confirms the variable is set, proceed with `ax profiles create --api-key $ARIZE_API_KEY` or `ax profiles update --api-key $ARIZE_API_KEY` as described above.
 
@@ -86,15 +88,18 @@ Confirm the API key and region are correct, then retry the original command.
 There is no profile flag for space ID. Save it as an environment variable:
 
 **macOS/Linux** — add to `~/.zshrc` or `~/.bashrc`:
+
 ```bash
 export ARIZE_SPACE_ID="U3BhY2U6..."
 ```
 Then `source ~/.zshrc` (or restart terminal).
 
 **Windows (PowerShell):**
+
 ```powershell
 [System.Environment]::SetEnvironmentVariable('ARIZE_SPACE_ID', 'U3BhY2U6...', 'User')
 ```
+
 Restart terminal for it to take effect.
 
 ## Save Credentials for Future Use
@@ -102,6 +107,7 @@ Restart terminal for it to take effect.
 At the **end of the session**, if the user manually provided any credentials during this conversation **and** those values were NOT already loaded from a saved profile or environment variable, offer to save them.
 
 **Skip this entirely if:**
+
 - The API key was already loaded from an existing profile or `ARIZE_API_KEY` env var
 - The space ID was already set via `ARIZE_SPACE_ID` env var
 - The user only used base64 project IDs (no space ID was needed)

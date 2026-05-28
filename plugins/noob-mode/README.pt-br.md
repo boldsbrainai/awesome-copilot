@@ -5,6 +5,7 @@ Camada de tradução em linguagem simples para usuários não técnicos do Copil
 ## Para quem é isto?
 
 Qualquer pessoa que use o Copilot CLI, mas **não** seja desenvolvedora de software:
+
 - Advogados e profissionais da área jurídica
 - Gerentes de produto e gerentes de programa
 - Stakeholders de negócio e executivos
@@ -22,14 +23,14 @@ copilot plugin install noob-mode@awesome-copilot
 
 ### Comandos (comandos slash)
 
-| Comando | Descrição |
-|---------|-------------|
-| `/noob-mode:noob-mode` | Ativa o Noob Mode para a sessão atual. O Copilot explicará tudo em linguagem simples — cada ação, cada solicitação de permissão e cada resultado. |
+| Comando                    | Descrição                                                                                                                                                           |
+|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/noob-mode:noob-mode`     | Ativa o Noob Mode para a sessão atual. O Copilot explicará tudo em linguagem simples — cada ação, cada solicitação de permissão e cada resultado.                  |
 
 ### Ativos incluídos
 
 | Ativo | Descrição |
-|-------|-------------|
+| ----- | ----------- |
 | `references/glossary.md` | Mais de 100 termos técnicos definidos em linguagem simples, organizados por categoria (Git, Sistema de Arquivos, Desenvolvimento, Web, Copilot CLI) |
 | `references/examples.md` | 15 exemplos de antes/depois mostrando como o Noob Mode transforma saída técnica em explicações claras |
 
@@ -48,13 +49,14 @@ copilot plugin install noob-mode@awesome-copilot
 ## Exemplo
 
 **Sem Noob Mode:**
-```
+```bash
 Allow tool: bash with command "grep -r 'indemnification' ./contracts/"?
 [y/n]
 ```
 
 **Com Noob Mode:**
-```
+Allow tool: bash with command "grep -r 'indemnification' ./contracts/"?
+
 📋 O QUE ESTOU PEDINDO PARA FAZER:
 Quero pesquisar em todos os arquivos da sua pasta "contracts" pela palavra "indemnification".
 

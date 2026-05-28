@@ -18,7 +18,7 @@ That's it. No other software, accounts, or setup required.
 
 Run this in Copilot CLI to confirm the plugin is available:
 
-```
+```bash
 /skills
 ```
 
@@ -61,13 +61,13 @@ Go back to your terminal and say `check the napkin`. Copilot looks at your white
 ### Skill
 
 | Skill | Description |
-|-------|-------------|
+| ----- | ----------- |
 | `napkin` | Visual whiteboard collaboration — creates a whiteboard, interprets your drawings and notes, and responds conversationally |
 
 ### Bundled Assets
 
 | Asset | Description |
-|-------|-------------|
+| ----- | ----------- |
 | `assets/napkin.html` | The whiteboard application — a single HTML file that opens in any browser, no installation needed |
 
 ## Whiteboard Features

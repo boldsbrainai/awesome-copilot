@@ -1,0 +1,93 @@
+{
+  "preflight": {
+    "docker_available": true,
+    "docker_version": "Docker version 29.5.2, build 79eb04c",
+    "ollama_available": true,
+    "ollama_version": "ollama version is 0.24.0",
+    "ollama_model_available": true,
+    "deeplx_url": "http://127.0.0.1:1188",
+    "deeplx_container": "docker:deeplx-core",
+    "deeplx_token_available": true,
+    "deeplx_health_ok": true,
+    "deeplx_translate_ok": true,
+    "deeplx_health": "{\"code\": 200, \"message\": \"DeepL Free API, Developed by sjlleo and missuo. Go to /translate with POST. http://github.com/OwO-Network/DeepLX\"}",
+    "deeplx_translate_preview": "Verificação da tradução antes da publicação.",
+    "ollama_preview": "Verificação prévia de tradução.\n",
+    "blocker": null
+  },
+  "manifest_path": "C:\\Users\\fjuni\\Projects\\01-Upstream\\awesome-copilot\\.translation\\pt-br-manifest.json",
+  "rules": {
+    "include": [
+      "**/*.md"
+    ],
+    "excludeNames": [
+      "*.pt-br.md",
+      "*.pt-br-*.md",
+      "*.pt-br.*.md"
+    ],
+    "excludeDirs": [
+      ".astro",
+      ".mypy_cache",
+      ".next",
+      "__pycache__",
+      "bin",
+      "build",
+      "coverage",
+      "dist",
+      "node_modules",
+      "obj",
+      "out"
+    ],
+    "excludeGenerated": [
+      "docs/README*.md",
+      "plugins/*/{agents,commands,skills,instructions,hooks,workflows}/**"
+    ],
+    "skipPortugueseHeuristic": true,
+    "skipExistingTranslationVariants": true
+  },
+  "pilot_selection": [
+    "skills/dataverse-python-quickstart/SKILL.md"
+  ],
+  "results": {
+    "skills/my-issues/SKILL.md": {
+      "status": "translated",
+      "target": "skills/my-issues/SKILL.pt-br.md"
+    },
+    ".github/workflows/codeowner-update.md": {
+      "status": "translated",
+      "target": ".github/workflows/codeowner-update.pt-br.md"
+    },
+    "instructions/dataverse-python.instructions.md": {
+      "status": "translated",
+      "target": "instructions/dataverse-python.instructions.pt-br.md"
+    },
+    "instructions/azure-functions-typescript.instructions.md": {
+      "status": "translated",
+      "target": "instructions/azure-functions-typescript.instructions.pt-br.md"
+    },
+    "agents/planner.agent.md": {
+      "status": "translated",
+      "target": "agents/planner.agent.pt-br.md"
+    },
+    "agents/lingodotdev-i18n.agent.md": {
+      "status": "translated",
+      "target": "agents/lingodotdev-i18n.agent.pt-br.md"
+    },
+    "agents/playwright-tester.agent.md": {
+      "status": "translated",
+      "target": "agents/playwright-tester.agent.pt-br.md"
+    },
+    "skills/my-pull-requests/SKILL.md": {
+      "status": "translated",
+      "target": "skills/my-pull-requests/SKILL.pt-br.md"
+    },
+    "skills/playwright-automation-fill-in-form/SKILL.md": {
+      "status": "translated",
+      "target": "skills/playwright-automation-fill-in-form/SKILL.pt-br.md"
+    },
+    "skills/dataverse-python-quickstart/SKILL.md": {
+      "status": "translated",
+      "target": "skills/dataverse-python-quickstart/SKILL.pt-br.md"
+    }
+  }
+}

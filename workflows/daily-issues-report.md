@@ -12,8 +12,6 @@ safe-outputs:
     labels: [report]
 ---
 
-## Daily Issues Report
-
 Create a daily summary of open issues for the team.
 
 ## What to Include

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { ROOT_FOLDER } from "./constants.mjs";
 
 const PLUGINS_DIR = path.join(ROOT_FOLDER, "plugins");
@@ -64,14 +64,98 @@ function validateKeywords(keywords) {
   return null;
 }
 
+function stripOptionalSuffix(value, suffixes) {
+  for (const suffix of suffixes) {
+    if (value.endsWith(suffix)) {
+      return value.slice(0, -suffix.length);
+    }
+  }
+  return value;
+}
+
+function validateAgentPath(entry, index) {
+  if (typeof entry !== "string") {
+    return [`agents[${index}] must be a string`];
+  }
+  if (!entry.startsWith("./")) {
+    return [`agents[${index}] must start with "./"`];
+  }
+  if (entry === "./agents") {
+    return [];
+  }
+  if (!entry.startsWith("./agents/")) {
+    return [`agents[${index}] must be "./agents" or start with "./agents/"`];
+  }
+
+  const basename = stripOptionalSuffix(entry.slice("./agents/".length), [".agent.md", ".md", "/"]);
+  if (!basename || basename.includes("/")) {
+    return [`agents[${index}] must reference a single agent path`];
+  }
+
+  const candidateFiles = [
+    path.join(ROOT_FOLDER, "agents", `${basename}.agent.md`),
+    path.join(ROOT_FOLDER, "agents", `${basename}.md`),
+  ];
+
+  if (!candidateFiles.some((candidate) => fs.existsSync(candidate))) {
+    return [`agents[${index}] source not found: agents/${basename}.agent.md`];
+  }
+
+  return [];
+}
+
+function validateSkillPath(entry, index) {
+  if (typeof entry !== "string") {
+    return [`skills[${index}] must be a string`];
+  }
+  if (!entry.startsWith("./")) {
+    return [`skills[${index}] must start with "./"`];
+  }
+  if (!entry.startsWith("./skills/")) {
+    return [`skills[${index}] must start with "./skills/"`];
+  }
+
+  const basename = stripOptionalSuffix(entry.slice("./skills/".length), ["/"]);
+  if (!basename || basename.includes("/")) {
+    return [`skills[${index}] must reference a single skill directory`];
+  }
+
+  const skillFile = path.join(ROOT_FOLDER, "skills", basename, "SKILL.md");
+  if (!fs.existsSync(skillFile)) {
+    return [`skills[${index}] source not found: skills/${basename}/SKILL.md`];
+  }
+
+  return [];
+}
+
+function validateCommandPath(entry, index) {
+  if (typeof entry !== "string") {
+    return [`commands[${index}] must be a string`];
+  }
+  if (!entry.startsWith("./")) {
+    return [`commands[${index}] must start with "./"`];
+  }
+  if (!(entry === "./commands" || entry.startsWith("./commands/"))) {
+    return [`commands[${index}] must be "./commands" or start with "./commands/"`];
+  }
+
+  const commandPath = path.join(ROOT_FOLDER, entry.slice("./".length));
+  if (!fs.existsSync(commandPath)) {
+    return [`commands[${index}] source not found: ${entry.slice("./".length)}`];
+  }
+
+  return [];
+}
+
 function validateSpecPaths(plugin) {
   const errors = [];
-  const specs = {
-    agents: { prefix: "./agents/", suffix: ".md", repoDir: "agents", repoSuffix: ".agent.md" },
-    skills: { prefix: "./skills/", suffix: "/", repoDir: "skills", repoFile: "SKILL.md" },
+  const validators = {
+    agents: validateAgentPath,
+    skills: validateSkillPath,
+    commands: validateCommandPath,
   };
 
-  for (const [field, spec] of Object.entries(specs)) {
+  for (const [field, validateEntry] of Object.entries(validators)) {
     const arr = plugin[field];
     if (arr === undefined) continue;
     if (!Array.isArray(arr)) {
@@ -79,37 +163,7 @@ function validateSpecPaths(plugin) {
       continue;
     }
     for (let i = 0; i < arr.length; i++) {
-      const p = arr[i];
-      if (typeof p !== "string") {
-        errors.push(`${field}[${i}] must be a string`);
-        continue;
-      }
-      if (!p.startsWith("./")) {
-        errors.push(`${field}[${i}] must start with "./"`);
-        continue;
-      }
-      if (!p.startsWith(spec.prefix)) {
-        errors.push(`${field}[${i}] must start with "${spec.prefix}"`);
-        continue;
-      }
-      if (!p.endsWith(spec.suffix)) {
-        errors.push(`${field}[${i}] must end with "${spec.suffix}"`);
-        continue;
-      }
-      // Validate the source file exists at repo root
-      const basename = p.slice(spec.prefix.length, p.length - spec.suffix.length);
-      if (field === "skills") {
-        const skillDir = path.join(ROOT_FOLDER, spec.repoDir, basename);
-        const skillFile = path.join(skillDir, spec.repoFile);
-        if (!fs.existsSync(skillFile)) {
-          errors.push(`${field}[${i}] source not found: ${spec.repoDir}/${basename}/SKILL.md`);
-        }
-      } else {
-        const srcFile = path.join(ROOT_FOLDER, spec.repoDir, basename + spec.repoSuffix);
-        if (!fs.existsSync(srcFile)) {
-          errors.push(`${field}[${i}] source not found: ${spec.repoDir}/${basename}${spec.repoSuffix}`);
-        }
-      }
+      errors.push(...validateEntry(arr[i], i));
     }
   }
   return errors;
@@ -192,7 +246,9 @@ function validatePlugins() {
 
     if (errors.length > 0) {
       console.error(`❌ ${dir}:`);
-      errors.forEach((e) => console.error(`   - ${e}`));
+      errors.forEach((e) => {
+        console.error(`   - ${e}`);
+      });
       hasErrors = true;
     } else {
       console.log(`✅ ${dir} is valid`);

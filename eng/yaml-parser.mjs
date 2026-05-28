@@ -142,7 +142,7 @@ function parseSkillMetadata(skillPath) {
         return null;
       }
 
-      // List bundled assets (all files except SKILL.md), recursing through subdirectories
+      // List bundled assets, excluding localized SKILL docs, and recurse through allowed subdirectories.
       const getAllFiles = (dirPath, arrayOfFiles = []) => {
         const files = fs.readdirSync(dirPath);
         const assetPaths = ['references', 'assets', 'scripts'];
@@ -153,9 +153,12 @@ function parseSkillMetadata(skillPath) {
             arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
           } else {
             const relativePath = path.relative(skillPath, filePath);
-            if (relativePath !== "SKILL.md") {
+            const normalizedRelativePath = relativePath.replace(/\\/g, "/");
+            const isSkillDoc = /^SKILL(?:\.[A-Za-z0-9-]+)?\.md$/.test(normalizedRelativePath);
+
+            if (!isSkillDoc) {
               // Normalize path separators to forward slashes for cross-platform consistency
-              arrayOfFiles.push(relativePath.replace(/\\/g, "/"));
+              arrayOfFiles.push(normalizedRelativePath);
             }
           }
         });

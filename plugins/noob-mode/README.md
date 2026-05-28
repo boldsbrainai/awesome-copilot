@@ -5,6 +5,7 @@ Plain-English translation layer for non-technical Copilot CLI users. When activa
 ## Who Is This For?
 
 Anyone who uses Copilot CLI but **isn't** a software developer:
+
 - Lawyers and legal professionals
 - Product managers and program managers
 - Business stakeholders and executives
