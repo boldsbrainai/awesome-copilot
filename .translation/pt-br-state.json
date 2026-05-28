@@ -109,6 +109,14 @@
     "agents/refine-issue.agent.md": {
       "status": "translated",
       "target": "agents/refine-issue.agent.pt-br.md"
+    },
+    "skills/phoenix-tracing/references/span-agent.md": {
+      "status": "translated",
+      "target": "skills/phoenix-tracing/references/span-agent.pt-br.md"
+    },
+    ".github/workflows/learning-hub-updater.md": {
+      "status": "translated",
+      "target": ".github/workflows/learning-hub-updater.pt-br.md"
     }
   }
 }
