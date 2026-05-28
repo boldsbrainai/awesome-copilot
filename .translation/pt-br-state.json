@@ -43,19 +43,49 @@
       "plugins/*/{agents,commands,skills,instructions,hooks,workflows}/**"
     ],
     "skipPortugueseHeuristic": true,
-    "skipExistingTranslationVariants": true
+    "skipExistingTranslationVariants": true,
+    "priorityPrefixes": [
+      "agents",
+      "instructions",
+      "cookbook",
+      "website",
+      "hooks",
+      ".github",
+      "docs",
+      "eng",
+      "plugins/awesome-copilot",
+      "plugins/frontend-web-dev",
+      "plugins/context-engineering",
+      "plugins/dataverse-sdk-for-python",
+      "plugins/cast-imaging",
+      "plugins/typespec-m365-copilot",
+      "plugins/power-platform-mcp-connector-development",
+      "plugins/doublecheck",
+      "plugins/devops-oncall",
+      "plugins/structured-autonomy"
+    ]
   },
   "pilot_selection": [
-    ".github/workflows/pr-duplicate-check.md",
-    "instructions/coldfusion-cfm.instructions.md",
-    "agents/meta-agentic-project-scaffold.agent.md",
-    "skills/semantic-kernel/references/python.md",
-    ".github/workflows/cli-for-beginners-sync.md",
-    "instructions/fedora-linux.instructions.md",
-    "agents/azure-policy-analyzer.agent.md",
-    "skills/semantic-kernel/references/dotnet.md",
-    "instructions/centos-linux.instructions.md",
-    "agents/jfrog-sec.agent.md"
+    "agents/fedora-linux-expert.agent.md",
+    "agents/tech-debt-remediation-plan.agent.md",
+    "agents/polyglot-test-builder.agent.md",
+    "agents/devils-advocate.agent.md",
+    "agents/critical-thinking.agent.md",
+    "agents/pagerduty-incident-responder.agent.md",
+    "agents/debian-linux-expert.agent.md",
+    "agents/ms-sql-dba.agent.md",
+    "agents/scientific-paper-research.agent.md",
+    "agents/expert-dotnet-software-engineer.agent.md",
+    "agents/openapi-to-application.agent.md",
+    "agents/principal-software-engineer.agent.md",
+    "agents/reepl-linkedin.agent.md",
+    "agents/polyglot-test-fixer.agent.md",
+    "agents/neon-migration-specialist.agent.md",
+    "agents/insiders-a11y-tracker.agent.md",
+    "agents/csharp-dotnet-janitor.agent.md",
+    "agents/demonstrate-understanding.agent.md",
+    "agents/diffblue-cover.agent.md",
+    "agents/expert-cpp-software-engineer.agent.md"
   ],
   "results": {
     "skills/my-issues/SKILL.md": {
@@ -138,6 +168,66 @@
     "instructions/pcf-tooling.instructions.md": {
       "status": "translated",
       "target": "instructions/pcf-tooling.instructions.pt-br.md"
+    },
+    ".github/workflows/pr-duplicate-check.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "instructions/coldfusion-cfm.instructions.md": {
+      "status": "translated",
+      "target": "instructions/coldfusion-cfm.instructions.pt-br.md"
+    },
+    "instructions/fedora-linux.instructions.md": {
+      "status": "translated",
+      "target": "instructions/fedora-linux.instructions.pt-br.md"
+    },
+    "agents/meta-agentic-project-scaffold.agent.md": {
+      "status": "translated",
+      "target": "agents/meta-agentic-project-scaffold.agent.pt-br.md"
+    },
+    "skills/semantic-kernel/references/python.md": {
+      "status": "translated",
+      "target": "skills/semantic-kernel/references/python.pt-br.md"
+    },
+    "agents/jfrog-sec.agent.md": {
+      "status": "translated",
+      "target": "agents/jfrog-sec.agent.pt-br.md"
+    },
+    "agents/fedora-linux-expert.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/octopus-deploy-release-notes-mcp.agent.md": {
+      "status": "translated",
+      "target": "agents/octopus-deploy-release-notes-mcp.agent.pt-br.md"
+    },
+    "agents/tech-debt-remediation-plan.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/polyglot-test-builder.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/devils-advocate.agent.md": {
+      "status": "translated",
+      "target": "agents/devils-advocate.agent.pt-br.md"
+    },
+    "agents/critical-thinking.agent.md": {
+      "status": "translated",
+      "target": "agents/critical-thinking.agent.pt-br.md"
+    },
+    "agents/pagerduty-incident-responder.agent.md": {
+      "status": "translated",
+      "target": "agents/pagerduty-incident-responder.agent.pt-br.md"
+    },
+    "agents/debian-linux-expert.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/ms-sql-dba.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
     }
   }
 }

@@ -153,6 +153,26 @@ EXCLUDED_DIR_NAMES = {
     "__pycache__",
     ".mypy_cache",
 }
+PRIORITY_PATH_PREFIXES = [
+    "agents",
+    "instructions",
+    "cookbook",
+    "website",
+    "hooks",
+    ".github",
+    "docs",
+    "eng",
+    "plugins/awesome-copilot",
+    "plugins/frontend-web-dev",
+    "plugins/context-engineering",
+    "plugins/dataverse-sdk-for-python",
+    "plugins/cast-imaging",
+    "plugins/typespec-m365-copilot",
+    "plugins/power-platform-mcp-connector-development",
+    "plugins/doublecheck",
+    "plugins/devops-oncall",
+    "plugins/structured-autonomy",
+]
 PROMPT_TEMPLATE = (
     "You are revising a Brazilian Portuguese Markdown translation that came from DeepLX.\n"
     "Return only the final revised pt-BR text.\n"
@@ -399,6 +419,17 @@ def is_materialized_plugin_file(relative: Path) -> bool:
     return parts[2] in MATERIALIZED_PLUGIN_DIRS
 
 
+def priority_prefix_rank(source: str) -> int:
+    for index, prefix in enumerate(PRIORITY_PATH_PREFIXES):
+        if source == prefix or source.startswith(prefix + "/"):
+            return index
+    return len(PRIORITY_PATH_PREFIXES)
+
+
+def manifest_sort_key(entry: ManifestEntry) -> tuple[int, int, str]:
+    return (priority_prefix_rank(entry.source), entry.size, entry.source)
+
+
 def target_variants_exist(path: Path) -> bool:
     stem = path.stem
     for sibling in path.parent.glob(f"{stem}.pt-br*.md"):
@@ -480,55 +511,16 @@ def build_manifest(repo_root: Path) -> tuple[list[ManifestEntry], dict[str, int]
             )
         )
 
+    manifest.sort(key=manifest_sort_key)
     return manifest, skipped_counts, skipped_samples
 
 
 def select_pilot(manifest: list[ManifestEntry], size: int) -> tuple[list[str], dict[str, int]]:
-    by_category: dict[str, list[ManifestEntry]] = {}
-    for entry in manifest:
-        by_category.setdefault(entry.category, []).append(entry)
-
-    for entries in by_category.values():
-        entries.sort(key=lambda item: (item.size, item.source))
-
-    preferred_order = ["root", "github", "instructions", "agents", "skills"]
-    selected: list[str] = []
-    coverage: dict[str, int] = {category: 0 for category in preferred_order}
-
-    for category in preferred_order:
-        if len(selected) >= size:
-            break
-        entries = by_category.get(category, [])
-        if entries:
-            selected.append(entries[0].source)
-            coverage[category] += 1
-
-    pools = {key: value[1:] if value else [] for key, value in by_category.items()}
-    category_cycle = [category for category in preferred_order if by_category.get(category)]
-    cycle_index = 0
-    while len(selected) < size:
-        if not category_cycle:
-            break
-        category = category_cycle[cycle_index % len(category_cycle)]
-        pool = pools.get(category, [])
-        if pool:
-            entry = pool.pop(0)
-            selected.append(entry.source)
-            coverage[category] = coverage.get(category, 0) + 1
-        cycle_index += 1
-        if cycle_index > 10000:
-            break
-
-    if len(selected) < size:
-        for entry in manifest:
-            if entry.source in selected:
-                continue
-            selected.append(entry.source)
-            coverage[entry.category] = coverage.get(entry.category, 0) + 1
-            if len(selected) == size:
-                break
-
-    return selected[:size], coverage
+    selected_entries = manifest[:size]
+    coverage: dict[str, int] = {}
+    for entry in selected_entries:
+        coverage[entry.category] = coverage.get(entry.category, 0) + 1
+    return [entry.source for entry in selected_entries], coverage
 
 
 class Translator:
@@ -848,6 +840,7 @@ def main() -> None:
             "excludeGenerated": ["docs/README*.md", "plugins/*/{agents,commands,skills,instructions,hooks,workflows}/**"],
             "skipPortugueseHeuristic": True,
             "skipExistingTranslationVariants": True,
+            "priorityPrefixes": PRIORITY_PATH_PREFIXES,
         },
         "counts": {
             "eligible": len(manifest),
