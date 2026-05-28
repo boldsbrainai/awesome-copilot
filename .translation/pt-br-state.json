@@ -105,6 +105,10 @@
     "instructions/genaiscript.instructions.md": {
       "status": "translated",
       "target": "instructions/genaiscript.instructions.pt-br.md"
+    },
+    "agents/refine-issue.agent.md": {
+      "status": "translated",
+      "target": "agents/refine-issue.agent.pt-br.md"
     }
   }
 }
