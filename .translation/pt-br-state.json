@@ -12,7 +12,7 @@
     "deeplx_translate_ok": true,
     "deeplx_health": "{\"code\": 200, \"message\": \"DeepL Free API, Developed by sjlleo and missuo. Go to /translate with POST. http://github.com/OwO-Network/DeepLX\"}",
     "deeplx_translate_preview": "Verificação da tradução antes da publicação.",
-    "ollama_preview": "Verificação prévia de tradução.\n",
+    "ollama_preview": "Verificação prévia de tradução.",
     "blocker": null
   },
   "manifest_path": "C:\\Users\\fjuni\\Projects\\01-Upstream\\awesome-copilot\\.translation\\pt-br-manifest.json",
@@ -46,16 +46,16 @@
     "skipExistingTranslationVariants": true
   },
   "pilot_selection": [
-    ".github/workflows/resource-staleness-report.md",
-    "instructions/genaiscript.instructions.md",
-    "agents/refine-issue.agent.md",
-    "skills/phoenix-tracing/references/span-agent.md",
-    ".github/workflows/learning-hub-updater.md",
-    "instructions/cmake-vcpkg.instructions.md",
-    "agents/address-comments.agent.md",
-    "skills/cloud-design-patterns/references/azure-service-mappings.md",
-    ".github/workflows/duplicate-resource-detector.md",
-    "instructions/pcf-tooling.instructions.md"
+    ".github/workflows/pr-duplicate-check.md",
+    "instructions/coldfusion-cfm.instructions.md",
+    "agents/meta-agentic-project-scaffold.agent.md",
+    "skills/semantic-kernel/references/python.md",
+    ".github/workflows/cli-for-beginners-sync.md",
+    "instructions/fedora-linux.instructions.md",
+    "agents/azure-policy-analyzer.agent.md",
+    "skills/semantic-kernel/references/dotnet.md",
+    "instructions/centos-linux.instructions.md",
+    "agents/jfrog-sec.agent.md"
   ],
   "results": {
     "skills/my-issues/SKILL.md": {
@@ -117,6 +117,27 @@
     ".github/workflows/learning-hub-updater.md": {
       "status": "translated",
       "target": ".github/workflows/learning-hub-updater.pt-br.md"
+    },
+    "instructions/cmake-vcpkg.instructions.md": {
+      "status": "translated",
+      "target": "instructions/cmake-vcpkg.instructions.pt-br.md"
+    },
+    "agents/address-comments.agent.md": {
+      "status": "skipped",
+      "reason": "existing translation target or variant already present",
+      "target": "agents/address-comments.agent.pt-br.md"
+    },
+    "skills/cloud-design-patterns/references/azure-service-mappings.md": {
+      "status": "translated",
+      "target": "skills/cloud-design-patterns/references/azure-service-mappings.pt-br.md"
+    },
+    ".github/workflows/duplicate-resource-detector.md": {
+      "status": "translated",
+      "target": ".github/workflows/duplicate-resource-detector.pt-br.md"
+    },
+    "instructions/pcf-tooling.instructions.md": {
+      "status": "translated",
+      "target": "instructions/pcf-tooling.instructions.pt-br.md"
     }
   }
 }

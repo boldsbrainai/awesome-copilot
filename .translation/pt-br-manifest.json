@@ -32,10 +32,10 @@
     "skipExistingTranslationVariants": true
   },
   "counts": {
-    "eligible": 1119,
-    "excluded_name": 45,
+    "eligible": 1100,
+    "excluded_name": 65,
     "excluded_path": 448,
-    "existing_translation": 43,
+    "existing_translation": 62,
     "portuguese_source": 1
   },
   "skippedSamples": {
@@ -44,7 +44,7 @@
       ".github\\copilot-instructions.pt-br.md",
       ".github\\pull_request_template.pt-br.md",
       ".github\\workflows\\codeowner-update.pt-br.md",
-      "agents\\cast-imaging-impact-analysis.agent.pt-br.md"
+      ".github\\workflows\\duplicate-resource-detector.pt-br.md"
     ],
     "excluded_path": [
       "docs\\README.agents.md",
@@ -58,7 +58,7 @@
       ".github\\copilot-instructions.md",
       ".github\\pull_request_template.md",
       ".github\\workflows\\codeowner-update.md",
-      "agents\\cast-imaging-impact-analysis.agent.md"
+      ".github\\workflows\\duplicate-resource-detector.md"
     ],
     "portuguese_source": [
       "skills\\finnish-humanizer\\SKILL.md"
@@ -71,39 +71,9 @@
       "size": 8051
     },
     {
-      "source": ".github/workflows/duplicate-resource-detector.md",
-      "category": "github",
-      "size": 5217
-    },
-    {
-      "source": ".github/workflows/learning-hub-updater.md",
-      "category": "github",
-      "size": 4007
-    },
-    {
       "source": ".github/workflows/pr-duplicate-check.md",
       "category": "github",
       "size": 5272
-    },
-    {
-      "source": ".github/workflows/resource-staleness-report.md",
-      "category": "github",
-      "size": 3881
-    },
-    {
-      "source": "agents/4.1-Beast.agent.md",
-      "category": "agents",
-      "size": 11303
-    },
-    {
-      "source": "agents/accessibility.agent.md",
-      "category": "agents",
-      "size": 12689
-    },
-    {
-      "source": "agents/address-comments.agent.md",
-      "category": "agents",
-      "size": 1531
     },
     {
       "source": "agents/adr-generator.agent.md",
@@ -111,44 +81,9 @@
       "size": 6662
     },
     {
-      "source": "agents/aem-frontend-specialist.agent.md",
-      "category": "agents",
-      "size": 20085
-    },
-    {
-      "source": "agents/agent-governance-reviewer.agent.md",
-      "category": "agents",
-      "size": 2399
-    },
-    {
-      "source": "agents/amplitude-experiment-implementation.agent.md",
-      "category": "agents",
-      "size": 1863
-    },
-    {
-      "source": "agents/api-architect.agent.md",
-      "category": "agents",
-      "size": 2547
-    },
-    {
       "source": "agents/apify-integration-expert.agent.md",
       "category": "agents",
       "size": 7383
-    },
-    {
-      "source": "agents/arch-linux-expert.agent.md",
-      "category": "agents",
-      "size": 2009
-    },
-    {
-      "source": "agents/arch.agent.md",
-      "category": "agents",
-      "size": 7086
-    },
-    {
-      "source": "agents/arm-migration.agent.md",
-      "category": "agents",
-      "size": 3364
     },
     {
       "source": "agents/atlassian-requirements-to-jira.agent.md",
@@ -719,11 +654,6 @@
       "source": "agents/reepl-linkedin.agent.md",
       "category": "agents",
       "size": 2514
-    },
-    {
-      "source": "agents/refine-issue.agent.md",
-      "category": "agents",
-      "size": 1343
     },
     {
       "source": "agents/repo-architect.agent.md",
@@ -1331,11 +1261,6 @@
       "size": 10802
     },
     {
-      "source": "instructions/cmake-vcpkg.instructions.md",
-      "category": "instructions",
-      "size": 860
-    },
-    {
       "source": "instructions/code-review-generic.instructions.md",
       "category": "instructions",
       "size": 14774
@@ -1559,11 +1484,6 @@
       "source": "instructions/fedora-linux.instructions.md",
       "category": "instructions",
       "size": 1269
-    },
-    {
-      "source": "instructions/genaiscript.instructions.md",
-      "category": "instructions",
-      "size": 827
     },
     {
       "source": "instructions/generate-modern-terraform-code-for-azure.instructions.md",
@@ -1829,11 +1749,6 @@
       "source": "instructions/pcf-sample-components.instructions.md",
       "category": "instructions",
       "size": 6045
-    },
-    {
-      "source": "instructions/pcf-tooling.instructions.md",
-      "category": "instructions",
-      "size": 1189
     },
     {
       "source": "instructions/performance-optimization.instructions.md",
@@ -2879,11 +2794,6 @@
       "source": "skills/cloud-design-patterns/references/architecture-design.md",
       "category": "skills",
       "size": 4680
-    },
-    {
-      "source": "skills/cloud-design-patterns/references/azure-service-mappings.md",
-      "category": "skills",
-      "size": 606
     },
     {
       "source": "skills/cloud-design-patterns/references/best-practices.md",
@@ -4554,11 +4464,6 @@
       "source": "skills/phoenix-tracing/references/setup-typescript.md",
       "category": "skills",
       "size": 3926
-    },
-    {
-      "source": "skills/phoenix-tracing/references/span-agent.md",
-      "category": "skills",
-      "size": 378
     },
     {
       "source": "skills/phoenix-tracing/references/span-chain.md",

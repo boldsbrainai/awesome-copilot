@@ -292,6 +292,7 @@ def preflight(deeplx_url: str, ollama_model: str) -> PreflightResult:
         translate_preview = translate_payload[:120]
 
     ollama_preview = None
+    ollama_generate_ok = False
     if ollama_available and ollama_model_available:
         ollama_status, ollama_payload = http_json(
             "http://127.0.0.1:11434/api/generate",
@@ -304,7 +305,10 @@ def preflight(deeplx_url: str, ollama_model: str) -> PreflightResult:
             timeout=90,
         )
         if ollama_status == 200 and isinstance(ollama_payload, dict):
-            ollama_preview = str(ollama_payload.get("response") or "")[:120]
+            ollama_response = str(ollama_payload.get("response") or "").strip()
+            if ollama_response:
+                ollama_generate_ok = True
+                ollama_preview = ollama_response[:120]
 
     blocker = None
     if not docker_available:
@@ -319,6 +323,8 @@ def preflight(deeplx_url: str, ollama_model: str) -> PreflightResult:
         blocker = f"DeepLX health check failed with status {health_status}."
     elif translate_status != 200:
         blocker = f"DeepLX translate preflight failed with status {translate_status}."
+    elif not ollama_generate_ok:
+        blocker = f"Ollama generate preflight failed for model {ollama_model}."
 
     return PreflightResult(
         docker_available=docker_available,
@@ -537,7 +543,9 @@ class Translator:
         translated_body = self.translate_markdown_body(body)
         deep_translated = translated_body if translated_frontmatter is None else translated_frontmatter + translated_body
         refined = self.refine_markdown_document(content, deep_translated)
-        return refined if self.markdown_shape_matches(content, refined) else deep_translated
+        if not self.markdown_shape_matches(content, refined):
+            raise RuntimeError("Gemma refinement returned invalid Markdown shape.")
+        return refined
 
     def translate_frontmatter(self, frontmatter: str) -> str:
         lines = frontmatter.splitlines(keepends=True)
@@ -747,7 +755,7 @@ class Translator:
         original_chunks = chunk_text(original, max_chars=1800)
         translated_chunks = chunk_text(translated, max_chars=1800)
         if len(original_chunks) != len(translated_chunks):
-            return translated
+            return self.call_gemma(original, translated)
 
         refined_chunks: list[str] = []
         for original_chunk, translated_chunk in zip(original_chunks, translated_chunks):
