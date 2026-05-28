@@ -12,7 +12,7 @@
     "deeplx_translate_ok": true,
     "deeplx_health": "{\"code\": 200, \"message\": \"DeepL Free API, Developed by sjlleo and missuo. Go to /translate with POST. http://github.com/OwO-Network/DeepLX\"}",
     "deeplx_translate_preview": "Verificação da tradução antes da publicação.",
-    "ollama_preview": "Verificação prévia de tradução.",
+    "ollama_preview": "Verificação de pré-tradução.",
     "blocker": null
   },
   "manifest_path": "C:\\Users\\fjuni\\Projects\\01-Upstream\\awesome-copilot\\.translation\\pt-br-manifest.json",
@@ -69,23 +69,23 @@
     "agents/fedora-linux-expert.agent.md",
     "agents/tech-debt-remediation-plan.agent.md",
     "agents/polyglot-test-builder.agent.md",
-    "agents/devils-advocate.agent.md",
-    "agents/critical-thinking.agent.md",
-    "agents/pagerduty-incident-responder.agent.md",
     "agents/debian-linux-expert.agent.md",
     "agents/ms-sql-dba.agent.md",
     "agents/scientific-paper-research.agent.md",
-    "agents/expert-dotnet-software-engineer.agent.md",
     "agents/openapi-to-application.agent.md",
-    "agents/principal-software-engineer.agent.md",
     "agents/reepl-linkedin.agent.md",
     "agents/polyglot-test-fixer.agent.md",
     "agents/neon-migration-specialist.agent.md",
-    "agents/insiders-a11y-tracker.agent.md",
     "agents/csharp-dotnet-janitor.agent.md",
     "agents/demonstrate-understanding.agent.md",
     "agents/diffblue-cover.agent.md",
-    "agents/expert-cpp-software-engineer.agent.md"
+    "agents/expert-cpp-software-engineer.agent.md",
+    "agents/janitor.agent.md",
+    "agents/swe-subagent.agent.md",
+    "agents/terratest-module-testing.agent.md",
+    "agents/tdd-green.agent.md",
+    "agents/python-notebook-sample-builder.agent.md",
+    "agents/tdd-red.agent.md"
   ],
   "results": {
     "skills/my-issues/SKILL.md": {
@@ -228,6 +228,38 @@
     "agents/ms-sql-dba.agent.md": {
       "status": "failed",
       "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/scientific-paper-research.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/expert-dotnet-software-engineer.agent.md": {
+      "status": "translated",
+      "target": "agents/expert-dotnet-software-engineer.agent.pt-br.md"
+    },
+    "agents/openapi-to-application.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/principal-software-engineer.agent.md": {
+      "status": "translated",
+      "target": "agents/principal-software-engineer.agent.pt-br.md"
+    },
+    "agents/reepl-linkedin.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/polyglot-test-fixer.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/neon-migration-specialist.agent.md": {
+      "status": "failed",
+      "error": "Gemma refinement returned invalid Markdown shape."
+    },
+    "agents/insiders-a11y-tracker.agent.md": {
+      "status": "translated",
+      "target": "agents/insiders-a11y-tracker.agent.pt-br.md"
     }
   }
 }

@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import time
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -805,6 +806,51 @@ def save_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def compute_progress_counts(results: dict[str, dict[str, Any]], pilot_selection: list[str]) -> dict[str, int]:
+    translated = 0
+    failed = 0
+    skipped = 0
+
+    for source in pilot_selection:
+        status = (results.get(source) or {}).get("status")
+        if status == "translated":
+            translated += 1
+        elif status == "failed":
+            failed += 1
+        elif status == "skipped":
+            skipped += 1
+
+    done = translated + failed + skipped
+    total = len(pilot_selection)
+    return {
+        "done": done,
+        "total": total,
+        "translated": translated,
+        "failed": failed,
+        "skipped": skipped,
+        "pending": max(total - done, 0),
+    }
+
+
+def emit_progress(
+    results: dict[str, dict[str, Any]],
+    pilot_selection: list[str],
+    current_source: str | None = None,
+    current_status: str | None = None,
+) -> None:
+    counts = compute_progress_counts(results, pilot_selection)
+    message = (
+        f"[pt-br] {counts['done']}/{counts['total']} done"
+        f" | translated={counts['translated']}"
+        f" failed={counts['failed']}"
+        f" skipped={counts['skipped']}"
+        f" pending={counts['pending']}"
+    )
+    if current_source and current_status:
+        message += f" | {current_source} -> {current_status}"
+    print(message, file=sys.stderr, flush=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[1]))
@@ -882,6 +928,7 @@ def main() -> None:
         pilot_selection, coverage = select_pilot(manifest, args.pilot_size)
     state.pilot_selection = pilot_selection
     save_json(state_path, state.__dict__)
+    emit_progress(state.results, state.pilot_selection)
 
     for relative_source in pilot_selection:
         existing = state.results.get(relative_source)
@@ -897,6 +944,7 @@ def main() -> None:
                 "target": str(target_path.relative_to(repo_root)).replace("\\", "/"),
             }
             save_json(state_path, state.__dict__)
+            emit_progress(state.results, state.pilot_selection, relative_source, "skipped")
             continue
 
         try:
@@ -916,6 +964,7 @@ def main() -> None:
                 "error": str(exc),
             }
         save_json(state_path, state.__dict__)
+        emit_progress(state.results, state.pilot_selection, relative_source, state.results[relative_source]["status"])
 
     output = {
         "preflight": state.preflight,
