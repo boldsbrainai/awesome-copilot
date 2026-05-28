@@ -32,10 +32,10 @@
     "skipExistingTranslationVariants": true
   },
   "counts": {
-    "eligible": 1120,
-    "excluded_name": 44,
+    "eligible": 1119,
+    "excluded_name": 45,
     "excluded_path": 448,
-    "existing_translation": 42,
+    "existing_translation": 43,
     "portuguese_source": 1
   },
   "skippedSamples": {
@@ -3176,11 +3176,6 @@
       "size": 3670
     },
     {
-      "source": "skills/dataverse-python-quickstart/SKILL.md",
-      "category": "skills",
-      "size": 652
-    },
-    {
       "source": "skills/dataverse-python-usecase-builder/SKILL.md",
       "category": "skills",
       "size": 6753
@@ -5633,7 +5628,7 @@
     {
       "source": "workflows/daily-issues-report.md",
       "category": "workflows",
-      "size": 498
+      "size": 474
     },
     {
       "source": "workflows/ospo-contributors-report.md",

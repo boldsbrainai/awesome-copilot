@@ -46,7 +46,16 @@
     "skipExistingTranslationVariants": true
   },
   "pilot_selection": [
-    "skills/dataverse-python-quickstart/SKILL.md"
+    ".github/workflows/resource-staleness-report.md",
+    "instructions/genaiscript.instructions.md",
+    "agents/refine-issue.agent.md",
+    "skills/phoenix-tracing/references/span-agent.md",
+    ".github/workflows/learning-hub-updater.md",
+    "instructions/cmake-vcpkg.instructions.md",
+    "agents/address-comments.agent.md",
+    "skills/cloud-design-patterns/references/azure-service-mappings.md",
+    ".github/workflows/duplicate-resource-detector.md",
+    "instructions/pcf-tooling.instructions.md"
   ],
   "results": {
     "skills/my-issues/SKILL.md": {
