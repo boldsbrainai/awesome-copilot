@@ -97,6 +97,14 @@
     "skills/dataverse-python-quickstart/SKILL.md": {
       "status": "translated",
       "target": "skills/dataverse-python-quickstart/SKILL.pt-br.md"
+    },
+    ".github/workflows/resource-staleness-report.md": {
+      "status": "translated",
+      "target": ".github/workflows/resource-staleness-report.pt-br.md"
+    },
+    "instructions/genaiscript.instructions.md": {
+      "status": "translated",
+      "target": "instructions/genaiscript.instructions.pt-br.md"
     }
   }
 }
